@@ -1,0 +1,70 @@
+********************REUSABLE METHODS*********************************
+
+package utility;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class SeleniumOperations
+{
+	public static ChromeDriver driver;
+	public static void browserLaunch(String key,String value)
+	{
+		String strBrowserName=key;
+		String strExe=value;
+		
+	System.setProperty(strBrowserName,strExe);
+	 driver=new ChromeDriver();
+	driver.manage().window().maximize();	
+	}
+	
+	public static void openApplication(String url)
+	{
+		String path=url;
+		driver.get(path);
+	}
+	
+	public static void clickOnElement(String locator)
+	{
+		String xpath=locator;
+		driver.findElement(By.xpath(xpath)).click();
+	}
+	
+	public static void moveToElement(String locator)
+	{
+		String xpath=locator;
+		Actions act=new Actions(driver);
+		WebElement a=driver.findElement(By.xpath(xpath));
+		act.moveToElement(a).build().perform();
+	}
+	
+	public static void sendText(String locator,String value)
+	{
+		String path=locator;
+		String text=value;
+		driver.findElement(By.xpath(path)).sendKeys(text);
+	}
+public static void main(String[] args) throws InterruptedException
+{
+	browserLaunch("webdriver.chrome.driver","C:\\Users\\mahim\\Desktop\\Madhuri\\AUTOMATION TASKBAR\\SELENIUM\\chromedriver.exe");
+
+	openApplication("https://www.flipkart.com/");
+	Thread.sleep(5000);
+	clickOnElement("//*[@class='_2KpZ6l _2doB4z']");
+	
+	moveToElement("//*[@class='_1_3w1N']");
+	
+	clickOnElement("//*[text()='My Profile']");
+	Thread.sleep(5000);
+	sendText("//*[@class='_2IX_2- VJZDxU']","8149221168");
+	
+	sendText("//*[@class='_2IX_2- _3mctLh VJZDxU']","madhuri123");
+	
+	clickOnElement("(//*[text()='Login'])[3]");
+}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    ARRAY    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
